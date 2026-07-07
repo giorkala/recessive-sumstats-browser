@@ -1,0 +1,10 @@
+{
+  "landingEyebrow": "BRaVa recessive browser",
+  "landingTitle": "Rare recessive effects across biobanks",
+  "landingCopy": "Companion browser for the BRaVa recessive association study, bringing together gene-based recessive summary statistics across cohorts, ancestries, phenotypes, and variant annotations. Search by gene symbol, Ensembl ID, or phenotype to compare recessive and additive effects side by side.",
+  "paperLabel": "\"Meta-analysis across six global biobanks identifies recessive coding associations with complex traits and diseases\", Lassen, Kalantzis et al (2026), AJHG.",
+  "paperUrl": "https://www.sciencedirect.com/science/article/pii/S0002929726001552",
+  "contactEmail": "kalantzis@ebi.ac.uk",
+  "copyright": "Copyright \u00a9 Georgios Kalantzis. This browser is a work in progress. AI was used to help develop it.",
+  "paperPrefix": "Read our publication for more details:"
+}

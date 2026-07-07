@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BRaVa Recessive Summary Statistics Browser</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body class="home-view">
+    <section class="landing-page" id="landing-page" aria-labelledby="landing-title">
+      <div class="landing-inner">
+        <p class="eyebrow" id="landing-eyebrow">BRaVa recessive catalogue</p>
+        <h1 id="landing-title">Recessive effects across biobanks</h1>
+        <p class="landing-copy" id="landing-copy">
+          Companion browser for the BRaVa recessive association study, bringing together
+          gene-based recessive summary statistics across cohorts, ancestries, phenotypes, and
+          variant annotations.
+        </p>
+        <p class="paper-citation" id="paper-citation">
+          <span id="paper-prefix">Read our publication for more details:</span>
+          <a href="https://www.sciencedirect.com/science/article/pii/S0002929726001552" target="_blank" rel="noreferrer">
+            BRaVa recessive association study, ScienceDirect
+          </a>
+        </p>
+        <figure class="landing-image">
+          <img src="images/cohorts.jpg" alt="Overview of cohorts represented in the BRaVa recessive browser" />
+        </figure>
+        <form class="landing-search" id="landing-search-form">
+          <label class="sr-only" for="landing-search-input">Search the recessive catalogue</label>
+          <input id="landing-search-input" type="search" placeholder="Search gene, Ensembl ID, or phenotype" />
+          <button id="landing-search-button" type="submit">Search</button>
+        </form>
+        <section class="landing-summary" id="summary-grid" aria-label="Dataset summary"></section>
+        <footer class="site-footnote" id="site-footnote">
+          Copyright © Georgios Kalantzis. This browser is a work in progress. AI was used to help develop it.
+        </footer>
+      </div>
+    </section>
+
+    <section class="results-page" id="results-page" hidden>
+      <header class="topbar">
+        <button class="brand-button" id="home-button" type="button" aria-label="Return to landing page">
+          <span class="eyebrow">BRaVa recessive catalogue</span>
+          <span>Recessive effects browser</span>
+        </button>
+        <div class="topbar-actions">
+          <div class="status-pill" id="data-status">Loading metadata</div>
+        </div>
+      </header>
+
+      <main class="layout">
+        <aside class="filters" aria-label="Filters">
+          <label class="field">
+            <span>Search</span>
+            <input id="search-input" type="search" placeholder="Gene symbol, Ensembl ID, or phenotype" />
+          </label>
+
+          <div class="button-row">
+            <button id="search-button" type="button">Search</button>
+            <button id="top-button" type="button" class="secondary">Top hits</button>
+          </div>
+
+          <label class="field">
+            <span>Data source</span>
+            <select id="source-filter">
+              <option value="both">Meta + cohort</option>
+              <option value="meta">Meta-analysis</option>
+              <option value="pre_meta">Cohort-level</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Phenotype</span>
+            <select id="trait-filter"></select>
+          </label>
+
+          <label class="field">
+            <span>Cohort</span>
+            <select id="cohort-filter"></select>
+          </label>
+
+          <label class="field">
+            <span>Ancestry</span>
+            <select id="ancestry-filter"></select>
+          </label>
+
+          <fieldset class="field annotation-field">
+            <legend>Annotation</legend>
+            <div id="annotation-filter" class="checkbox-group"></div>
+          </fieldset>
+
+          <label class="field">
+            <span>Model</span>
+            <select id="encoding-filter"></select>
+          </label>
+
+          <label class="field">
+            <span>P threshold</span>
+            <input id="p-filter" type="number" min="0" max="1" step="any" placeholder="1e-6" />
+          </label>
+
+          <button id="reset-button" type="button" class="secondary full-width">Reset filters</button>
+
+          <section class="qc-panel" aria-label="QC summary">
+            <h2>QC</h2>
+            <div id="qc-summary" class="mini-list"></div>
+          </section>
+        </aside>
+
+        <section class="workspace">
+          <section class="result-shell">
+            <div class="result-header">
+              <div>
+                <h2 id="result-title">Top associations</h2>
+                <p id="result-subtitle">Smallest available p-values from the generated index.</p>
+              </div>
+              <div class="result-actions">
+                <button id="copy-link-button" type="button" class="secondary">Copy link</button>
+                <button id="download-button" type="button" class="secondary">Download rows</button>
+              </div>
+            </div>
+
+            <div id="message" class="message" hidden></div>
+
+            <div class="table-wrap">
+              <table id="results-table">
+                <thead></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="detail-grid">
+            <section class="detail-panel">
+              <h2>Selected association</h2>
+              <div id="detail-panel" class="mini-list empty">Select a row to inspect it.</div>
+            </section>
+            <section class="detail-panel">
+              <h2>Recessive effect estimates across cohorts</h2>
+              <div id="plot-panel" class="plot-panel empty">Rows with recessive beta and SE will be plotted here.</div>
+            </section>
+          </section>
+          <footer class="site-footnote compact" id="results-footnote">
+            Copyright © Georgios Kalantzis. Work in progress; AI was used to help develop this browser.
+          </footer>
+        </section>
+      </main>
+    </section>
+
+    <a class="feedback-button" id="feedback-button" href="mailto:kalantzis@ebi.ac.uk?subject=BRaVa%20recessive%20browser%20feedback">Send feedback</a>
+    <script src="assets/app.js"></script>
+  </body>
+</html>
+

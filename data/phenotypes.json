@@ -1,0 +1,2500 @@
+[
+  {
+    "case_control_ratio": 0.04987048579101367,
+    "cohort_ancestry": [
+      {
+        "ancestry": "AFR",
+        "cohort": "UKB",
+        "n_cases": 237
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 33600
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "UKB",
+        "n_cases": 102
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 3452
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GEL",
+        "n_cases": 114
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 566
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 567
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_cases": 301
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 876
+      }
+    ],
+    "cohort_count": 9,
+    "female_specific": "No",
+    "id": "AFib",
+    "label": "Atrial Fibrillation",
+    "tested_lassen_2024": "Yes",
+    "total_cases": 39815,
+    "total_controls": 758553,
+    "type": "binary"
+  },
+  {
+    "cohort_ancestry": [
+      {
+        "ancestry": "AFR",
+        "cohort": "UKB",
+        "n_samples": 6185
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "UKB",
+        "n_samples": 1567
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_samples": 377334
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "UKB",
+        "n_samples": 6035
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "AOU",
+        "n_samples": 31998
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "AOU",
+        "n_samples": 32492
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "AOU",
+        "n_samples": 106538
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "AOU",
+        "n_samples": 1443
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_samples": 30774
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BBJ",
+        "n_samples": 4934
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_samples": 794
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_samples": 8095
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_samples": 674
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "BioMe",
+        "n_samples": 8154
+      }
+    ],
+    "id": "ALT",
+    "label": "Alanine transaminase",
+    "total_samples": 617017,
+    "type": "quantitative"
+  },
+  {
+    "case_control_ratio": 0.01365022484191193,
+    "cohort_ancestry": [
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 8771
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 842
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 298
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 417
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_cases": 268
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 344
+      }
+    ],
+    "cohort_count": 6,
+    "female_specific": "No",
+    "id": "AMD",
+    "label": "Age-related macular degeneration",
+    "tested_lassen_2024": "Yes",
+    "total_cases": 10940,
+    "total_controls": 790512,
+    "type": "binary"
+  },
+  {
+    "cohort_ancestry": [
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_samples": 376082
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "AOU",
+        "n_samples": 36250
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "AOU",
+        "n_samples": 33651
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "AOU",
+        "n_samples": 116894
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "AOU",
+        "n_samples": 1528
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_samples": 12351
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BBJ",
+        "n_samples": 4900
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_samples": 8063
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BioMe",
+        "n_samples": 4506
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_samples": 673
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "BioMe",
+        "n_samples": 8113
+      }
+    ],
+    "id": "AST",
+    "label": "Aspartate aminotransferase",
+    "total_samples": 603011,
+    "type": "quantitative"
+  },
+  {
+    "case_control_ratio": 0.11958382638032176,
+    "cohort_ancestry": [
+      {
+        "ancestry": "AFR",
+        "cohort": "UKB",
+        "n_cases": 700
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 38750
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "UKB",
+        "n_cases": 448
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "AOU",
+        "n_cases": 8778
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "AOU",
+        "n_cases": 5945
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "AOU",
+        "n_cases": 398
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "AOU",
+        "n_cases": 21250
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "AOU",
+        "n_cases": 168
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 7632
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GEL",
+        "n_cases": 706
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 5724
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BBJ",
+        "n_cases": 100
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 1882
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_cases": 1254
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 1137
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "BioMe",
+        "n_cases": 123
+      }
+    ],
+    "cohort_count": 16,
+    "female_specific": "No",
+    "id": "Asth",
+    "label": "Asthma",
+    "tested_lassen_2024": "Yes",
+    "total_cases": 94995,
+    "total_controls": 699385,
+    "type": "binary"
+  },
+  {
+    "cohort_ancestry": [
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_samples": 394221
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "AOU",
+        "n_samples": 70272
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "AOU",
+        "n_samples": 7447
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "AOU",
+        "n_samples": 171473
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "AOU",
+        "n_samples": 3294
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_samples": 30134
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BBJ",
+        "n_samples": 5223
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_samples": 873
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_samples": 8403
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_samples": 775
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "BioMe",
+        "n_samples": 9094
+      }
+    ],
+    "id": "BMI",
+    "label": "Body mass index",
+    "total_samples": 701209,
+    "type": "quantitative"
+  },
+  {
+    "case_control_ratio": 0.11219036692301389,
+    "cohort_ancestry": [
+      {
+        "ancestry": "AFR",
+        "cohort": "UKB",
+        "n_cases": 295
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 14528
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "UKB",
+        "n_cases": 215
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "AOU",
+        "n_cases": 3307
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "AOU",
+        "n_cases": 1459
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "AOU",
+        "n_cases": 211
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "AOU",
+        "n_cases": 3879
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 1241
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 434
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_cases": 218
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 224
+      }
+    ],
+    "cohort_count": 11,
+    "female_specific": "Yes",
+    "id": "BenCervUterNeo",
+    "label": "Benign and in situ cervical and uterine neoplasms",
+    "tested_lassen_2024": "No / Partial",
+    "total_cases": 26011,
+    "total_controls": 205836,
+    "type": "binary"
+  },
+  {
+    "case_control_ratio": 0.10870090138082282,
+    "cohort_ancestry": [
+      {
+        "ancestry": "AFR",
+        "cohort": "UKB",
+        "n_cases": 343
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "UKB",
+        "n_cases": 170
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 49083
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "UKB",
+        "n_cases": 244
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "AOU",
+        "n_cases": 4036
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "AOU",
+        "n_cases": 2327
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "AOU",
+        "n_cases": 345
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "AOU",
+        "n_cases": 21634
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "AOU",
+        "n_cases": 116
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 5240
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GEL",
+        "n_cases": 233
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 1791
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 763
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_cases": 416
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 593
+      }
+    ],
+    "cohort_count": 15,
+    "female_specific": "No",
+    "id": "BenIntNeo",
+    "label": "Benign and in situ intestinal neoplasms",
+    "tested_lassen_2024": "No / Partial",
+    "total_cases": 87334,
+    "total_controls": 716100,
+    "type": "binary"
+  },
+  {
+    "case_control_ratio": 0.11029271754747356,
+    "cohort_ancestry": [
+      {
+        "ancestry": "AFR",
+        "cohort": "UKB",
+        "n_cases": 154
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 14720
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "UKB",
+        "n_cases": 151
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "AOU",
+        "n_cases": 1323
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "AOU",
+        "n_cases": 933
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "AOU",
+        "n_cases": 174
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "AOU",
+        "n_cases": 6896
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 221
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 315
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_cases": 177
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 422
+      }
+    ],
+    "cohort_count": 11,
+    "female_specific": "Yes",
+    "id": "BreastCanc",
+    "label": "Breast cancer",
+    "tested_lassen_2024": "Yes",
+    "total_cases": 25486,
+    "total_controls": 205590,
+    "type": "binary"
+  },
+  {
+    "case_control_ratio": 0.03298695368476998,
+    "cohort_ancestry": [
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 21294
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "UKB",
+        "n_cases": 599
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 1911
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GEL",
+        "n_cases": 156
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 1700
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BBJ",
+        "n_cases": 258
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 330
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 192
+      }
+    ],
+    "cohort_count": 8,
+    "female_specific": "No",
+    "id": "CAD",
+    "label": "Coronary artery disease",
+    "tested_lassen_2024": "Yes",
+    "total_cases": 26440,
+    "total_controls": 775089,
+    "type": "binary"
+  },
+  {
+    "case_control_ratio": 0.06293209800148772,
+    "cohort_ancestry": [
+      {
+        "ancestry": "AFR",
+        "cohort": "UKB",
+        "n_cases": 190
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 23769
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "AOU",
+        "n_cases": 4595
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "AOU",
+        "n_cases": 1488
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "AOU",
+        "n_cases": 11639
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 3441
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GEL",
+        "n_cases": 126
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 979
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 924
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_cases": 501
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 656
+      }
+    ],
+    "cohort_count": 11,
+    "female_specific": "No",
+    "id": "COPD",
+    "label": "Chronic obstructive pulmonary disease",
+    "tested_lassen_2024": "Yes",
+    "total_cases": 48308,
+    "total_controls": 719313,
+    "type": "binary"
+  },
+  {
+    "case_control_ratio": 0.025455902456485067,
+    "cohort_ancestry": [
+      {
+        "ancestry": "AFR",
+        "cohort": "UKB",
+        "n_cases": 239
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 9295
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "UKB",
+        "n_cases": 137
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 3338
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GEL",
+        "n_cases": 267
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 1924
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BBJ",
+        "n_cases": 950
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 1962
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_cases": 884
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 934
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "BioMe",
+        "n_cases": 125
+      }
+    ],
+    "cohort_count": 11,
+    "female_specific": "No",
+    "id": "CRF",
+    "label": "Chronic Renal Failure",
+    "tested_lassen_2024": "No / Partial",
+    "total_cases": 20055,
+    "total_controls": 767778,
+    "type": "binary"
+  },
+  {
+    "cohort_ancestry": [
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_samples": 376685
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "AOU",
+        "n_samples": 8890
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "AOU",
+        "n_samples": 8338
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "AOU",
+        "n_samples": 612
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "AOU",
+        "n_samples": 33622
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_samples": 23484
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BBJ",
+        "n_samples": 2730
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_samples": 279
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_samples": 2215
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "BioMe",
+        "n_samples": 2515
+      }
+    ],
+    "id": "CRP",
+    "label": "C-reactive protein",
+    "total_samples": 459370,
+    "type": "quantitative"
+  },
+  {
+    "case_control_ratio": 0.00542229445721011,
+    "cohort_ancestry": [
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 921
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BBJ",
+        "n_cases": 240
+      }
+    ],
+    "cohort_count": 2,
+    "female_specific": "Yes",
+    "id": "CervCanc",
+    "label": "Cervical cancer",
+    "tested_lassen_2024": "Yes",
+    "total_cases": 1161,
+    "total_controls": 212955,
+    "type": "binary"
+  },
+  {
+    "case_control_ratio": 0.029523634990032875,
+    "cohort_ancestry": [
+      {
+        "ancestry": "AFR",
+        "cohort": "UKB",
+        "n_cases": 217
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 10260
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "UKB",
+        "n_cases": 129
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 3839
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GEL",
+        "n_cases": 151
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 262
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BBJ",
+        "n_cases": 1564
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 3352
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_cases": 1737
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BioMe",
+        "n_cases": 171
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 1828
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "BioMe",
+        "n_cases": 172
+      }
+    ],
+    "cohort_count": 12,
+    "female_specific": "No",
+    "id": "ColonRectCanc",
+    "label": "Colon and rectum cancer",
+    "tested_lassen_2024": "Yes",
+    "total_cases": 23682,
+    "total_controls": 778455,
+    "type": "binary"
+  },
+  {
+    "case_control_ratio": 0.09968337823181611,
+    "cohort_ancestry": [
+      {
+        "ancestry": "AFR",
+        "cohort": "UKB",
+        "n_cases": 473
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 14266
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "UKB",
+        "n_cases": 267
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 5833
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 998
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_cases": 488
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 469
+      }
+    ],
+    "cohort_count": 7,
+    "female_specific": "Yes",
+    "id": "EFRMB",
+    "label": "Excess, frequent and irregular menstrual bleeding",
+    "tested_lassen_2024": "No / Partial",
+    "total_cases": 22794,
+    "total_controls": 205870,
+    "type": "binary"
+  },
+  {
+    "case_control_ratio": 0.022032301789693752,
+    "cohort_ancestry": [
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 1303
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "AOU",
+        "n_cases": 454
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "AOU",
+        "n_cases": 397
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "AOU",
+        "n_cases": 103
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "AOU",
+        "n_cases": 1853
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 685
+      }
+    ],
+    "cohort_count": 6,
+    "female_specific": "Yes",
+    "id": "FemInf",
+    "label": "Female infertility",
+    "tested_lassen_2024": "Yes",
+    "total_cases": 4795,
+    "total_controls": 212840,
+    "type": "binary"
+  },
+  {
+    "case_control_ratio": 0.0055539714302296535,
+    "cohort_ancestry": [
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 1488
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 1064
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 826
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BBJ",
+        "n_cases": 128
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 441
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_cases": 147
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 308
+      }
+    ],
+    "cohort_count": 7,
+    "female_specific": "No",
+    "id": "Gout",
+    "label": "Gout",
+    "tested_lassen_2024": "Yes",
+    "total_cases": 4402,
+    "total_controls": 788184,
+    "type": "binary"
+  },
+  {
+    "cohort_ancestry": [
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_samples": 345497
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "AOU",
+        "n_samples": 26233
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "AOU",
+        "n_samples": 20080
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "AOU",
+        "n_samples": 3088
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "AOU",
+        "n_samples": 94256
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_samples": 27209
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BBJ",
+        "n_samples": 3824
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_samples": 560
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_samples": 6213
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BioMe",
+        "n_samples": 3351
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_samples": 454
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "BioMe",
+        "n_samples": 5036
+      }
+    ],
+    "id": "HDLC",
+    "label": "HDL cholesterol",
+    "total_samples": 535801,
+    "type": "quantitative"
+  },
+  {
+    "case_control_ratio": 0.04909862209342879,
+    "cohort_ancestry": [
+      {
+        "ancestry": "AFR",
+        "cohort": "UKB",
+        "n_cases": 113
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 15774
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "UKB",
+        "n_cases": 330
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "AOU",
+        "n_cases": 4612
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "AOU",
+        "n_cases": 2291
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "AOU",
+        "n_cases": 120
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "AOU",
+        "n_cases": 9722
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 2123
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GEL",
+        "n_cases": 130
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 992
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BBJ",
+        "n_cases": 284
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 1083
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_cases": 534
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 607
+      }
+    ],
+    "cohort_count": 14,
+    "female_specific": "No",
+    "id": "HF",
+    "label": "Heart Failure",
+    "tested_lassen_2024": "Yes",
+    "total_cases": 38715,
+    "total_controls": 749800,
+    "type": "binary"
+  },
+  {
+    "case_control_ratio": 0.281787418959362,
+    "cohort_ancestry": [
+      {
+        "ancestry": "AFR",
+        "cohort": "UKB",
+        "n_cases": 2710
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "UKB",
+        "n_cases": 214
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 59489
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "UKB",
+        "n_cases": 1110
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "AOU",
+        "n_cases": 25461
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "AOU",
+        "n_cases": 15259
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "AOU",
+        "n_cases": 1328
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "AOU",
+        "n_cases": 64690
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "AOU",
+        "n_cases": 516
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 12833
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GEL",
+        "n_cases": 1037
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 9799
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BBJ",
+        "n_cases": 2733
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 5401
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_cases": 2663
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BioMe",
+        "n_cases": 239
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 3100
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "BioMe",
+        "n_cases": 349
+      }
+    ],
+    "cohort_count": 18,
+    "female_specific": "No",
+    "id": "HTN",
+    "label": "Hypertension",
+    "tested_lassen_2024": "Yes",
+    "total_cases": 208931,
+    "total_controls": 532518,
+    "type": "binary"
+  },
+  {
+    "cohort_ancestry": [
+      {
+        "ancestry": "AFR",
+        "cohort": "UKB",
+        "n_samples": 6507
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "UKB",
+        "n_samples": 1640
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_samples": 394632
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "UKB",
+        "n_samples": 6245
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "AOU",
+        "n_samples": 76585
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "AOU",
+        "n_samples": 8895
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "AOU",
+        "n_samples": 210399
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "AOU",
+        "n_samples": 3794
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_samples": 31896
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BBJ",
+        "n_samples": 5267
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_samples": 885
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_samples": 8461
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BioMe",
+        "n_samples": 4760
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_samples": 781
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "BioMe",
+        "n_samples": 9151
+      }
+    ],
+    "id": "Height",
+    "label": "Height",
+    "total_samples": 769898,
+    "type": "quantitative"
+  },
+  {
+    "case_control_ratio": 0.04156821998033759,
+    "cohort_ancestry": [
+      {
+        "ancestry": "AFR",
+        "cohort": "UKB",
+        "n_cases": 183
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 25510
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "UKB",
+        "n_cases": 215
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 3853
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GEL",
+        "n_cases": 341
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 1369
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 792
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_cases": 478
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 704
+      }
+    ],
+    "cohort_count": 9,
+    "female_specific": "No",
+    "id": "IBD",
+    "label": "Inflammatory bowel disease",
+    "tested_lassen_2024": "No / Partial",
+    "total_cases": 33445,
+    "total_controls": 771136,
+    "type": "binary"
+  },
+  {
+    "case_control_ratio": 0.10250058332050856,
+    "cohort_ancestry": [
+      {
+        "ancestry": "AFR",
+        "cohort": "UKB",
+        "n_cases": 466
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "UKB",
+        "n_cases": 108
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 69663
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "UKB",
+        "n_cases": 956
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 6795
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GEL",
+        "n_cases": 413
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 2508
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 637
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_cases": 446
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 596
+      }
+    ],
+    "cohort_count": 10,
+    "female_specific": "No",
+    "id": "IFHern",
+    "label": "Inguinal, femoral, and abdominal hernia",
+    "tested_lassen_2024": "Yes",
+    "total_cases": 82588,
+    "total_controls": 723144,
+    "type": "binary"
+  },
+  {
+    "case_control_ratio": 0.012389903175847164,
+    "cohort_ancestry": [
+      {
+        "ancestry": "AFR",
+        "cohort": "UKB",
+        "n_cases": 106
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 4268
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "AOU",
+        "n_cases": 716
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "AOU",
+        "n_cases": 443
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "AOU",
+        "n_cases": 2459
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 730
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 271
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 422
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_cases": 148
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 381
+      }
+    ],
+    "cohort_count": 10,
+    "female_specific": "No",
+    "id": "ILDSarc",
+    "label": "Interstitial lung disease and pulmonary sarcoidosis",
+    "tested_lassen_2024": "No / Partial",
+    "total_cases": 9944,
+    "total_controls": 792645,
+    "type": "binary"
+  },
+  {
+    "cohort_ancestry": [
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_samples": 376752
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "AOU",
+        "n_samples": 20174
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "AOU",
+        "n_samples": 14492
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "AOU",
+        "n_samples": 2312
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "AOU",
+        "n_samples": 72596
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "AOU",
+        "n_samples": 1046
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_samples": 25974
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BBJ",
+        "n_samples": 3866
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_samples": 563
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_samples": 6244
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "BioMe",
+        "n_samples": 5048
+      }
+    ],
+    "id": "LDLC",
+    "label": "LDL cholesterol",
+    "total_samples": 529067,
+    "type": "quantitative"
+  },
+  {
+    "case_control_ratio": 0.0331151502037578,
+    "cohort_ancestry": [
+      {
+        "ancestry": "AFR",
+        "cohort": "UKB",
+        "n_cases": 108
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 3074
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 4020
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 144
+      }
+    ],
+    "cohort_count": 4,
+    "female_specific": "Yes",
+    "id": "MatHem",
+    "label": "Maternal hemorrhage",
+    "tested_lassen_2024": "No",
+    "total_cases": 7346,
+    "total_controls": 214486,
+    "type": "binary"
+  },
+  {
+    "case_control_ratio": 0.01457881158114583,
+    "cohort_ancestry": [
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 5622
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "UKB",
+        "n_cases": 198
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 1809
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 673
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 498
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_cases": 292
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 876
+      }
+    ],
+    "cohort_count": 7,
+    "female_specific": "No",
+    "id": "NonRheuValv",
+    "label": "Non-rheumatic valvular heart disease",
+    "tested_lassen_2024": "Yes",
+    "total_cases": 9968,
+    "total_controls": 673764,
+    "type": "binary"
+  },
+  {
+    "case_control_ratio": 0.014562232431868017,
+    "cohort_ancestry": [
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 7375
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "UKB",
+        "n_cases": 122
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 836
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 338
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 1227
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_cases": 724
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 535
+      }
+    ],
+    "cohort_count": 7,
+    "female_specific": "No",
+    "id": "PAD",
+    "label": "Peripheral artery disease",
+    "tested_lassen_2024": "Yes",
+    "total_cases": 11157,
+    "total_controls": 755003,
+    "type": "binary"
+  },
+  {
+    "case_control_ratio": 0.006958472194786244,
+    "cohort_ancestry": [
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 2825
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 915
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 394
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BBJ",
+        "n_cases": 591
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 329
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_cases": 157
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 249
+      }
+    ],
+    "cohort_count": 7,
+    "female_specific": "No",
+    "id": "Pancreat",
+    "label": "Pancreatitis",
+    "tested_lassen_2024": "Yes",
+    "total_cases": 5460,
+    "total_controls": 779195,
+    "type": "binary"
+  },
+  {
+    "case_control_ratio": 0.026536894904221592,
+    "cohort_ancestry": [
+      {
+        "ancestry": "AFR",
+        "cohort": "UKB",
+        "n_cases": 103
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 11936
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "UKB",
+        "n_cases": 256
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "AOU",
+        "n_cases": 1212
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "AOU",
+        "n_cases": 868
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "AOU",
+        "n_cases": 3893
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 1124
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GEL",
+        "n_cases": 104
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 1095
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BBJ",
+        "n_cases": 178
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 326
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_cases": 158
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 142
+      }
+    ],
+    "cohort_count": 13,
+    "female_specific": "No",
+    "id": "PeptUlcer",
+    "label": "Peptic ulcer disease",
+    "tested_lassen_2024": "Yes",
+    "total_cases": 21395,
+    "total_controls": 784841,
+    "type": "binary"
+  },
+  {
+    "case_control_ratio": 0.010039007331544489,
+    "cohort_ancestry": [
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 4982
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 800
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 1255
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BBJ",
+        "n_cases": 204
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 128
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_cases": 153
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 361
+      }
+    ],
+    "cohort_count": 7,
+    "female_specific": "No",
+    "id": "Psori",
+    "label": "Psoriasis",
+    "tested_lassen_2024": "Yes",
+    "total_cases": 7883,
+    "total_controls": 777354,
+    "type": "binary"
+  },
+  {
+    "case_control_ratio": 0.002185829276597072,
+    "cohort_ancestry": [
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 856
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 187
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 484
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 155
+      }
+    ],
+    "cohort_count": 4,
+    "female_specific": "No",
+    "id": "RheumArth",
+    "label": "Rheumatoid arthritis",
+    "tested_lassen_2024": "Yes",
+    "total_cases": 1682,
+    "total_controls": 767820,
+    "type": "binary"
+  },
+  {
+    "case_control_ratio": 0.008715610321478679,
+    "cohort_ancestry": [
+      {
+        "ancestry": "AFR",
+        "cohort": "UKB",
+        "n_cases": 139
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 3977
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "UKB",
+        "n_cases": 153
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 1314
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 575
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BBJ",
+        "n_cases": 200
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 190
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 310
+      }
+    ],
+    "cohort_count": 8,
+    "female_specific": "No",
+    "id": "RheumHeaDis",
+    "label": "Rheumatic heart disease",
+    "tested_lassen_2024": "Yes",
+    "total_cases": 6858,
+    "total_controls": 780006,
+    "type": "binary"
+  },
+  {
+    "case_control_ratio": 0.017021802914842885,
+    "cohort_ancestry": [
+      {
+        "ancestry": "AFR",
+        "cohort": "UKB",
+        "n_cases": 154
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 9167
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "UKB",
+        "n_cases": 154
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 866
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 402
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BBJ",
+        "n_cases": 442
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 657
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_cases": 316
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 228
+      }
+    ],
+    "cohort_count": 9,
+    "female_specific": "No",
+    "id": "Stroke",
+    "label": "Stroke",
+    "tested_lassen_2024": "No / Partial",
+    "total_cases": 12386,
+    "total_controls": 715269,
+    "type": "binary"
+  },
+  {
+    "case_control_ratio": 0.051191699047736086,
+    "cohort_ancestry": [
+      {
+        "ancestry": "AFR",
+        "cohort": "UKB",
+        "n_cases": 1255
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "UKB",
+        "n_cases": 131
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 12775
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "UKB",
+        "n_cases": 707
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 3685
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GEL",
+        "n_cases": 644
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 10058
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BBJ",
+        "n_cases": 2523
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 3102
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_cases": 1746
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BioMe",
+        "n_cases": 122
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 1283
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "BioMe",
+        "n_cases": 293
+      }
+    ],
+    "cohort_count": 13,
+    "female_specific": "No",
+    "id": "T2Diab",
+    "label": "Type 2 diabetes",
+    "tested_lassen_2024": "Yes",
+    "total_cases": 38324,
+    "total_controls": 710313,
+    "type": "binary"
+  },
+  {
+    "cohort_ancestry": [
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_samples": 222300
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "AOU",
+        "n_samples": 26711
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "AOU",
+        "n_samples": 20873
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "AOU",
+        "n_samples": 3112
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "AOU",
+        "n_samples": 97263
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "AOU",
+        "n_samples": 1385
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_samples": 27478
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BBJ",
+        "n_samples": 4788
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_samples": 571
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_samples": 6290
+      }
+    ],
+    "id": "TChol",
+    "label": "Total cholesterol",
+    "total_samples": 410771,
+    "type": "quantitative"
+  },
+  {
+    "cohort_ancestry": [
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_samples": 377167
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "AOU",
+        "n_samples": 25122
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "AOU",
+        "n_samples": 20419
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "AOU",
+        "n_samples": 3106
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "AOU",
+        "n_samples": 95121
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "AOU",
+        "n_samples": 1375
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_samples": 25941
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BBJ",
+        "n_samples": 4605
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_samples": 567
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_samples": 6265
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "BioMe",
+        "n_samples": 3392
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_samples": 456
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "BioMe",
+        "n_samples": 5071
+      }
+    ],
+    "id": "TG",
+    "label": "Triglycerides",
+    "total_samples": 568607,
+    "type": "quantitative"
+  },
+  {
+    "case_control_ratio": 0.037825127385733584,
+    "cohort_ancestry": [
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 9644
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "AOU",
+        "n_cases": 1573
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "AOU",
+        "n_cases": 2366
+      },
+      {
+        "ancestry": "EAS",
+        "cohort": "AOU",
+        "n_cases": 148
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "AOU",
+        "n_cases": 10556
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 1551
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GEL",
+        "n_cases": 143
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 1634
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 399
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_cases": 343
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 453
+      }
+    ],
+    "cohort_count": 11,
+    "female_specific": "No",
+    "id": "Urolith",
+    "label": "Urolithiasis",
+    "tested_lassen_2024": "Yes",
+    "total_cases": 28810,
+    "total_controls": 732853,
+    "type": "binary"
+  },
+  {
+    "case_control_ratio": 0.020028789834210265,
+    "cohort_ancestry": [
+      {
+        "ancestry": "AFR",
+        "cohort": "UKB",
+        "n_cases": 117
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 12474
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "UKB",
+        "n_cases": 104
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 2136
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GEL",
+        "n_cases": 103
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 399
+      }
+    ],
+    "cohort_count": 6,
+    "female_specific": "No",
+    "id": "VTE",
+    "label": "Venous thromboembolism",
+    "tested_lassen_2024": "Yes",
+    "total_cases": 15333,
+    "total_controls": 750215,
+    "type": "binary"
+  },
+  {
+    "case_control_ratio": 0.026020084873655525,
+    "cohort_ancestry": [
+      {
+        "ancestry": "EUR",
+        "cohort": "UKB",
+        "n_cases": 15027
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "GEL",
+        "n_cases": 1307
+      },
+      {
+        "ancestry": "SAS",
+        "cohort": "GNH",
+        "n_cases": 1436
+      },
+      {
+        "ancestry": "AFR",
+        "cohort": "BioMe",
+        "n_cases": 630
+      },
+      {
+        "ancestry": "AMR",
+        "cohort": "BioMe",
+        "n_cases": 490
+      },
+      {
+        "ancestry": "EUR",
+        "cohort": "BioMe",
+        "n_cases": 369
+      }
+    ],
+    "cohort_count": 6,
+    "female_specific": "No",
+    "id": "VaricVeins",
+    "label": "Varicose veins",
+    "tested_lassen_2024": "No",
+    "total_cases": 19259,
+    "total_controls": 720900,
+    "type": "binary"
+  }
+]
