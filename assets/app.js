@@ -270,15 +270,13 @@ function setupFilters() {
 function renderSummary() {
   const sources = state.manifest?.sources || {};
   const rows = Object.values(sources).reduce((sum, source) => sum + Number(source.rows || 0), 0);
-  const sourceNames = Object.keys(sources).map(sourceLabel).join(" + ") || "No summary rows";
   const metrics = [
-    ["Rows indexed", formatInt(rows), sourceNames],
-    ["Phenotypes", formatInt(state.manifest?.counts?.phenotypes), "ST1 and ST2 metadata"],
-    ["Genes", formatInt(state.manifest?.counts?.genes), `${formatInt(state.manifest?.counts?.genes_with_symbols)} with symbols`],
-    ["Buckets", formatInt(state.manifest?.bucket_count), "Gene-keyed gzip TSV chunks"],
+    ["Rows indexed", formatInt(rows)],
+    ["Phenotypes", formatInt(state.manifest?.counts?.phenotypes)],
+    ["Genes", formatInt(state.manifest?.counts?.genes)],
   ];
   els.summaryGrid.innerHTML = metrics
-    .map(([label, value, note]) => `<div class="metric"><b>${label}</b><span>${value}</span><small>${note}</small></div>`)
+    .map(([label, value]) => `<div class="metric"><b>${label}</b><span>${value}</span></div>`)
     .join("");
 }
 
