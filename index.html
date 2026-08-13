@@ -60,14 +60,6 @@
             <button id="top-button" type="button" class="secondary">Top hits</button>
           </div>
 
-          <label class="field">
-            <span>Data source</span>
-            <select id="source-filter">
-              <option value="both">Meta + cohort</option>
-              <option value="meta">Meta-analysis</option>
-              <option value="pre_meta">Cohort-level</option>
-            </select>
-          </label>
 
           <label class="field">
             <span>Phenotype</span>
@@ -122,12 +114,29 @@
 
             <div id="message" class="message" hidden></div>
 
-            <div class="table-wrap">
-              <table id="results-table">
-                <thead></thead>
-                <tbody></tbody>
-              </table>
-            </div>
+            <section class="split-results" aria-label="Association results">
+              <section class="result-panel">
+                <h3>Meta-analysis</h3>
+                <div class="table-wrap compact">
+                  <table id="meta-results-table">
+                    <thead></thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </section>
+              <section class="result-panel">
+                <div class="result-panel-heading">
+                  <h3>Cohort-level results <span id="cohort-focus-label" class="focus-label">showing all matching pairs</span></h3>
+                  <button id="clear-cohort-focus-button" type="button" class="secondary compact-action" hidden>Show all</button>
+                </div>
+                <div class="table-wrap">
+                  <table id="cohort-results-table">
+                    <thead></thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </section>
+            </section>
           </section>
 
           <section class="detail-grid">
@@ -136,8 +145,11 @@
               <div id="detail-panel" class="mini-list empty">Select a row to inspect it.</div>
             </section>
             <section class="detail-panel">
-              <h2>Recessive effect estimates across cohorts</h2>
-              <div id="plot-panel" class="plot-panel empty">Rows with recessive beta and SE will be plotted here.</div>
+              <div class="panel-heading">
+                <h2 id="plot-title">Recessive effect estimates across cohorts</h2>
+                <button id="download-plot-button" type="button" class="secondary">Save PNG</button>
+              </div>
+              <div id="plot-panel" class="plot-panel empty">Select a meta-analysis row or cohort-level row to plot one gene-phenotype pair.</div>
             </section>
           </section>
           <footer class="site-footnote compact" id="results-footnote">

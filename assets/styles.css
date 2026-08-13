@@ -524,11 +524,73 @@ button:focus {
   overflow: auto;
 }
 
+.split-results {
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+}
+
+.result-panel {
+  min-width: 0;
+}
+
+.result-panel h3 {
+  margin: 0;
+  font-size: 0.98rem;
+}
+
+.result-panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.focus-label {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.compact-action {
+  min-height: 34px;
+  padding: 7px 12px;
+  white-space: nowrap;
+}
+
+.table-wrap.compact {
+  max-height: 42vh;
+}
+
+.model-cell-inline {
+  display: inline-block;
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+
+.model-cell-inline.add {
+  background: #eff6ff;
+}
+
+.model-cell-inline.rec {
+  background: #fff1f2;
+}
+
 table {
   width: 100%;
-  min-width: 1540px;
+  min-width: 1180px;
   border-collapse: collapse;
   font-size: 0.84rem;
+}
+
+#meta-results-table {
+  min-width: 860px;
+}
+
+#cohort-results-table {
+  min-width: 1480px;
 }
 
 thead {
@@ -643,6 +705,22 @@ tbody tr:hover {
 .detail-panel h2,
 .qc-panel h2 {
   margin-bottom: 12px;
+}
+
+.panel-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.panel-heading h2 {
+  margin-bottom: 0;
+}
+
+.panel-heading button {
+  flex: 0 0 auto;
 }
 
 .mini-list {

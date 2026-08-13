@@ -13,6 +13,10 @@ const state = {
   siteContent: null,
   currentRows: [],
   currentPairs: [],
+  currentMetaPairs: [],
+  currentCohortPairs: [],
+  currentVisibleCohortPairs: [],
+  cohortFocus: null,
   lastLoadedRows: [],
   chunkCache: new Map(),
   sort: { key: "best_p", direction: "asc" },
@@ -91,8 +95,6 @@ function rowP(row) {
 }
 
 function modelCode(row) {
-  const annotation = normalizeText(get(row, ["ANNOTATION", "annotation"])).toLowerCase();
-  if (annotation === "cauchy") return "combined";
   const code = normalizeText(get(row, ["ENCODING", "encoding"])).toUpperCase();
   if (code === "A") return "add";
   if (code === "R") return "rec";
@@ -324,14 +326,11 @@ function applySiteContent() {
 }
 
 function selectedSources() {
-  const source = els.sourceFilter.value;
-  if (source === "both") return ["meta", "pre_meta"];
-  return [source];
+  return ["meta", "pre_meta"];
 }
 
 function activeFilters() {
   return {
-    source: els.sourceFilter.value,
     trait: els.traitFilter.value,
     cohort: els.cohortFilter.value,
     ancestry: els.ancestryFilter.value,
@@ -342,10 +341,12 @@ function activeFilters() {
 }
 
 function rowPassesBaseFilters(row, filters) {
-  if (filters.source !== "both" && rowSource(row) !== filters.source) return false;
+  const source = rowSource(row);
+  const annotation = get(row, ["ANNOTATION", "annotation"]);
+  if (source !== "meta" && annotation === "cauchy") return false;
   if (filters.trait && rowTrait(row) !== filters.trait) return false;
-  if (filters.cohort && get(row, ["BIOBANK", "biobank"]) !== filters.cohort) return false;
-  if (filters.ancestry && get(row, ["ANCESTRY", "ancestry"]) !== filters.ancestry) return false;
+  if (source !== "meta" && filters.cohort && get(row, ["BIOBANK", "biobank"]) !== filters.cohort) return false;
+  if (source !== "meta" && filters.ancestry && get(row, ["ANCESTRY", "ancestry"]) !== filters.ancestry) return false;
   if (filters.annotation.length && !filters.annotation.includes(get(row, ["ANNOTATION", "annotation"]))) return false;
   return true;
 }
@@ -442,6 +443,23 @@ function pairDelta(pair) {
   return Number.isFinite(add) && Number.isFinite(rec) ? rec - add : Number.NaN;
 }
 
+function pairIsCauchy(pair) {
+  return normalizeText(pair.annotation).toLowerCase() === "cauchy";
+}
+
+function pairNCohorts(pair) {
+  return pairIsCauchy(pair) ? Number.NaN : pairN(pair);
+}
+
+function pairEnrichment(pair) {
+  const recP = rowP(pair.rec || {});
+  const addP = rowP(pair.add || {});
+  if (!Number.isFinite(recP) || !Number.isFinite(addP) || recP <= 0 || addP <= 0) return Number.NaN;
+  const recLog = -Math.log10(recP);
+  const addLog = -Math.log10(addP);
+  return addLog > 0 ? recLog / addLog : Number.NaN;
+}
+
 function pairPassesModelFilter(pair, filters) {
   const threshold = filters.p;
   if (filters.encoding) {
@@ -464,8 +482,10 @@ function pairSortValue(pair, key) {
   switch (key) {
     case "gene":
       return pair.symbol || pair.geneId;
+    case "gene_id":
+      return pair.geneId;
     case "trait":
-      return pair.trait;
+      return traitLabel(pair.trait);
     case "source":
       return sourceLabel(pair.source);
     case "cohort":
@@ -492,6 +512,10 @@ function pairSortValue(pair, key) {
       return pairDelta(pair);
     case "best_p":
       return pairBestP(pair);
+    case "enrichment":
+      return pairEnrichment(pair);
+    case "n_cohorts":
+      return pairNCohorts(pair);
     case "n":
       return pairN(pair);
     case "cases":
@@ -535,14 +559,12 @@ function updateUrl(query = "") {
   const params = new URLSearchParams();
   if (query) params.set("q", query);
   for (const [key, value] of Object.entries(activeFilters())) {
-    if (key === "source") continue;
     if (Array.isArray(value)) {
       if (value.length) params.set(key, value.join(","));
     } else if (value !== "" && value !== null) {
       params.set(key, value);
     }
   }
-  if (els.sourceFilter.value !== "both") params.set("source", els.sourceFilter.value);
   const next = `${window.location.pathname}${params.toString() ? `?${params.toString()}` : ""}`;
   window.history.replaceState({}, "", next);
 }
@@ -574,22 +596,106 @@ function showResultsPage() {
 
 function renderRows(rows, title, subtitle) {
   const pairs = applyFilters(rows);
+  const metaPairs = pairs.filter((pair) => pair.source === "meta");
+  const cohortPairs = pairs.filter((pair) => pair.source !== "meta");
   state.currentRows = rows;
   state.currentPairs = pairs;
+  state.currentMetaPairs = metaPairs;
+  state.currentCohortPairs = cohortPairs;
+  state.cohortFocus = null;
   els.resultTitle.textContent = title;
-  els.resultSubtitle.textContent =
-    pairs.length > MAX_TABLE_ROWS
-      ? `${subtitle} Showing ${MAX_TABLE_ROWS.toLocaleString()} of ${pairs.length.toLocaleString()} matching association pairs.`
-      : `${subtitle} ${pairs.length.toLocaleString()} matching association pairs.`;
-  renderTable(pairs.slice(0, MAX_TABLE_ROWS));
-  renderPlot(pairs);
+  const shownMeta = Math.min(MAX_TABLE_ROWS, metaPairs.length);
+  const shownCohort = Math.min(MAX_TABLE_ROWS, cohortPairs.length);
+  els.resultSubtitle.textContent = `${subtitle} ${metaPairs.length.toLocaleString()} meta-analysis pairs and ${cohortPairs.length.toLocaleString()} cohort-level pairs match. Showing ${shownMeta.toLocaleString()} meta and ${shownCohort.toLocaleString()} cohort rows.`;
+  renderTable("meta", metaPairs.slice(0, MAX_TABLE_ROWS));
+  renderCohortPanel();
+  renderFocusedPlot();
 }
 
-function tableColumns() {
+function pairFocusFromPair(pair) {
+  if (!pair) return null;
+  return {
+    geneId: pair.geneId || "",
+    trait: pair.trait || "",
+    symbol: pair.symbol || "",
+  };
+}
+
+function focusMatchesPair(focus, pair) {
+  return Boolean(focus && pair && pair.geneId === focus.geneId && pair.trait === focus.trait);
+}
+
+function focusLabel(focus) {
+  if (!focus) return "all matching gene-phenotype pairs";
+  const gene = focus.symbol || focus.geneId || "gene";
+  return `${focus.trait || "phenotype"}-${gene}`;
+}
+
+function cohortPairsForCurrentFocus() {
+  if (!state.cohortFocus) return state.currentCohortPairs;
+  return state.currentCohortPairs.filter((pair) => focusMatchesPair(state.cohortFocus, pair));
+}
+
+function renderCohortPanel() {
+  const visiblePairs = cohortPairsForCurrentFocus();
+  state.currentVisibleCohortPairs = visiblePairs;
+  if (els.cohortFocusLabel) {
+    els.cohortFocusLabel.textContent = state.cohortFocus
+      ? `showing ${focusLabel(state.cohortFocus)}`
+      : "showing all matching pairs";
+  }
+  if (els.clearCohortFocusButton) {
+    els.clearCohortFocusButton.hidden = !state.cohortFocus;
+  }
+  renderTable("cohort", visiblePairs.slice(0, MAX_TABLE_ROWS));
+}
+
+function setCohortFocus(pair, selectedPair = pair) {
+  state.cohortFocus = pairFocusFromPair(pair);
+  renderCohortPanel();
+  renderFocusedPlot(selectedPair);
+}
+
+function clearCohortFocus() {
+  state.cohortFocus = null;
+  renderCohortPanel();
+  renderFocusedPlot();
+}
+
+function renderFocusedPlot(selected = null) {
+  if (els.plotTitle) {
+    els.plotTitle.textContent = state.cohortFocus
+      ? `Recessive effect estimates across cohorts for ${focusLabel(state.cohortFocus)}`
+      : "Recessive effect estimates across cohorts";
+  }
+  if (!state.cohortFocus) {
+    if (els.plotPanel) {
+      els.plotPanel.classList.add("empty");
+      els.plotPanel.textContent = "Select a meta-analysis row or cohort-level row to plot one gene-phenotype pair.";
+    }
+    return;
+  }
+  renderPlot(cohortPairsForCurrentFocus(), selected);
+}
+
+function tableColumns(kind) {
+  if (kind === "meta") {
+    return [
+      { key: "gene", label: "Gene symbol" },
+      { key: "gene_id", label: "Gene ID" },
+      { key: "trait", label: "Phenotype label" },
+      { key: "annotation", label: "Annotation" },
+      { key: "sex", label: "Sex" },
+      { key: "rec_p", label: "Rec P" },
+      { key: "add_p", label: "Add P" },
+      { key: "enrichment", label: "Enrichment" },
+      { key: "n_cohorts", label: "N cohorts" },
+    ];
+  }
   return [
-    { key: "gene", label: "Gene" },
-    { key: "trait", label: "Phenotype" },
-    { key: "source", label: "Source" },
+    { key: "gene", label: "Gene symbol" },
+    { key: "gene_id", label: "Gene ID" },
+    { key: "trait", label: "Phenotype label" },
     { key: "cohort", label: "Cohort" },
     { key: "ancestry", label: "Ancestry" },
     { key: "annotation", label: "Annotation" },
@@ -601,7 +707,6 @@ function tableColumns() {
     { key: "add_effect", label: "Add BETA/Z" },
     { key: "add_se", label: "Add SE" },
     { key: "delta", label: "Rec-Add" },
-    { key: "best_p", label: "Best P" },
     { key: "n", label: "N" },
     { key: "cases", label: "Cases" },
     { key: "controls", label: "Controls" },
@@ -621,63 +726,102 @@ function renderModelMetric(row, metric) {
   return "NA";
 }
 
-function renderTable(pairs) {
-  const columns = tableColumns();
-  els.tableHead.innerHTML = `<tr>${columns
+function tableCell(pair, column) {
+  const geneLabel = pair.symbol || "NA";
+  switch (column.key) {
+    case "gene":
+      return `<b>${escapeHtml(geneLabel)}</b>`;
+    case "gene_id":
+      return escapeHtml(pair.geneId || "NA");
+    case "trait":
+      return escapeHtml(traitLabel(pair.trait));
+    case "cohort":
+      return escapeHtml(pair.biobank || "NA");
+    case "ancestry":
+      return escapeHtml(pair.ancestry || "NA");
+    case "annotation":
+      return escapeHtml(pair.annotation || "NA");
+    case "sex":
+      return escapeHtml(pair.sex || "NA");
+    case "rec_p":
+      return `<span class="model-cell-inline rec">${renderModelMetric(pair.rec, "p")}</span>`;
+    case "rec_effect":
+      return renderModelMetric(pair.rec, "effect");
+    case "rec_se":
+      return renderModelMetric(pair.rec, "se");
+    case "add_p":
+      return `<span class="model-cell-inline add">${renderModelMetric(pair.add, "p")}</span>`;
+    case "add_effect":
+      return renderModelMetric(pair.add, "effect");
+    case "add_se":
+      return renderModelMetric(pair.add, "se");
+    case "delta":
+      return escapeHtml(formatNumber(pairDelta(pair)));
+    case "best_p":
+      return escapeHtml(formatP(pairBestP(pair)));
+    case "enrichment":
+      return escapeHtml(formatNumber(pairEnrichment(pair)));
+    case "n_cohorts":
+      return escapeHtml(formatInt(pairNCohorts(pair)));
+    case "n":
+      return escapeHtml(formatInt(pairN(pair)));
+    case "cases":
+      return escapeHtml(formatInt(pairCases(pair)));
+    case "controls":
+      return escapeHtml(formatInt(pairControls(pair)));
+    default:
+      return "NA";
+  }
+}
+
+function renderTable(kind, pairs) {
+  const table = kind === "meta" ? els.metaTable : els.cohortTable;
+  const head = table ? table.querySelector("thead") : null;
+  const body = table ? table.querySelector("tbody") : null;
+  if (!head || !body) return;
+  const columns = tableColumns(kind);
+  head.innerHTML = `<tr>${columns
     .map(
       (column) =>
-        `<th><button type="button" class="sort-header" data-sort-key="${column.key}" aria-label="Sort by ${escapeHtml(column.label)}">${escapeHtml(column.label)}${sortIndicator(column.key)}</button></th>`,
+        `<th><button type="button" class="sort-header" data-sort-kind="${kind}" data-sort-key="${column.key}" aria-label="Sort by ${escapeHtml(column.label)}">${escapeHtml(column.label)}${sortIndicator(column.key)}</button></th>`,
     )
     .join("")}</tr>`;
-  els.tableHead.querySelectorAll("button[data-sort-key]").forEach((button) => {
+  head.querySelectorAll("button[data-sort-key]").forEach((button) => {
     button.addEventListener("click", () => {
       const key = button.dataset.sortKey;
       if (state.sort.key === key) state.sort.direction = state.sort.direction === "asc" ? "desc" : "asc";
       else state.sort = { key, direction: key.endsWith("_p") || key === "best_p" ? "asc" : "asc" };
-      state.currentPairs = sortPairs(state.currentPairs);
-      renderTable(state.currentPairs.slice(0, MAX_TABLE_ROWS));
-      renderPlot(state.currentPairs);
+      if (button.dataset.sortKind === "meta") {
+        state.currentMetaPairs = sortPairs(state.currentMetaPairs);
+        renderTable("meta", state.currentMetaPairs.slice(0, MAX_TABLE_ROWS));
+      } else {
+        state.currentCohortPairs = sortPairs(state.currentCohortPairs);
+        renderCohortPanel();
+        renderFocusedPlot();
+      }
     });
   });
 
   if (!pairs.length) {
-    els.tableBody.innerHTML = `<tr><td colspan="${columns.length}" class="empty">No association pairs match the current filters.</td></tr>`;
+    body.innerHTML = `<tr><td colspan="${columns.length}" class="empty">No ${kind === "meta" ? "meta-analysis" : "cohort-level"} association pairs match the current filters.</td></tr>`;
     return;
   }
 
-  els.tableBody.innerHTML = pairs
-    .map((pair, index) => {
-      const geneLabel = pair.symbol || pair.geneId;
-      const source = pair.source;
-      return `
-        <tr data-row-index="${index}">
-          <td><span class="gene-cell"><b>${escapeHtml(geneLabel)}</b><span>${escapeHtml(pair.symbol ? pair.geneId : "")}</span></span></td>
-          <td><b>${escapeHtml(pair.trait)}</b><br><span class="muted">${escapeHtml(traitLabel(pair.trait))}</span></td>
-          <td><span class="tag ${source === "meta" ? "meta" : ""}">${escapeHtml(sourceLabel(source))}</span></td>
-          <td>${escapeHtml(pair.biobank || "META")}</td>
-          <td>${escapeHtml(pair.ancestry || "META")}</td>
-          <td>${escapeHtml(pair.annotation || "NA")}</td>
-          <td>${escapeHtml(pair.sex || "NA")}</td>
-          <td class="model-cell rec">${renderModelMetric(pair.rec, "p")}</td>
-          <td class="model-cell rec">${renderModelMetric(pair.rec, "effect")}</td>
-          <td class="model-cell rec">${renderModelMetric(pair.rec, "se")}</td>
-          <td class="model-cell add">${renderModelMetric(pair.add, "p")}</td>
-          <td class="model-cell add">${renderModelMetric(pair.add, "effect")}</td>
-          <td class="model-cell add">${renderModelMetric(pair.add, "se")}</td>
-          <td>${escapeHtml(formatNumber(pairDelta(pair)))}</td>
-          <td>${escapeHtml(formatP(pairBestP(pair)))}</td>
-          <td>${escapeHtml(formatInt(pairN(pair)))}</td>
-          <td>${escapeHtml(formatInt(pairCases(pair)))}</td>
-          <td>${escapeHtml(formatInt(pairControls(pair)))}</td>
+  body.innerHTML = pairs
+    .map(
+      (pair, index) => `
+        <tr data-row-kind="${kind}" data-row-index="${index}">
+          ${columns.map((column) => `<td>${tableCell(pair, column)}</td>`).join("")}
         </tr>
-      `;
-    })
+      `,
+    )
     .join("");
-  els.tableBody.querySelectorAll("tr[data-row-index]").forEach((rowEl) => {
+  body.querySelectorAll("tr[data-row-index]").forEach((rowEl) => {
     rowEl.addEventListener("click", () => {
-      const pair = pairs[Number(rowEl.dataset.rowIndex)];
+      const pairList = rowEl.dataset.rowKind === "meta" ? state.currentMetaPairs : state.currentVisibleCohortPairs;
+      const pair = pairList[Number(rowEl.dataset.rowIndex)];
       renderDetail(pair);
-      renderPlot(state.currentPairs, pair);
+      setCohortFocus(pair, pair);
     });
   });
 }
@@ -1026,7 +1170,7 @@ function renderTopHits() {
 }
 
 function resetFilters() {
-  els.sourceFilter.value = "both";
+  state.cohortFocus = null;
   els.traitFilter.value = "";
   els.cohortFilter.value = "";
   els.ancestryFilter.value = "";
@@ -1038,25 +1182,28 @@ function resetFilters() {
 }
 
 function pairToExportRow(pair) {
-  return {
+  const base = {
     gene_symbol: pair.symbol || "",
     gene_id: pair.geneId,
-    phenotype_id: pair.trait,
     phenotype_label: traitLabel(pair.trait),
-    source: sourceLabel(pair.source),
-    cohort: pair.biobank || "META",
-    ancestry: pair.ancestry || "META",
     annotation: pair.annotation || "",
     sex: pair.sex || "",
     rec_p: formatP(rowP(pair.rec || {})),
+    add_p: formatP(rowP(pair.add || {})),
+    best_p: formatP(pairBestP(pair)),
+  };
+  if (pair.source === "meta") {
+    return { ...base, enrichment: formatNumber(pairEnrichment(pair)), n_cohorts: formatInt(pairNCohorts(pair)) };
+  }
+  return {
+    ...base,
+    cohort: pair.biobank || "",
+    ancestry: pair.ancestry || "",
     rec_effect_or_z: formatNumber(effectValue(pair.rec)),
     rec_se: formatNumber(numericFromRow(pair.rec, ["SE", "se"])),
-    add_p: formatP(rowP(pair.add || {})),
     add_effect_or_z: formatNumber(effectValue(pair.add)),
     add_se: formatNumber(numericFromRow(pair.add, ["SE", "se"])),
     rec_minus_add: formatNumber(pairDelta(pair)),
-    combined_p: pair.combined ? formatP(rowP(pair.combined)) : "NA",
-    best_p: formatP(pairBestP(pair)),
     n: formatInt(pairN(pair)),
     cases: formatInt(pairCases(pair)),
     controls: formatInt(pairControls(pair)),
@@ -1064,9 +1211,30 @@ function pairToExportRow(pair) {
 }
 
 function downloadRows() {
-  const rows = state.currentPairs.map(pairToExportRow);
+  const rows = [...state.currentMetaPairs, ...state.currentVisibleCohortPairs].map(pairToExportRow);
   if (!rows.length) return;
-  const columns = Object.keys(rows[0]);
+  const columns = [
+    "gene_symbol",
+    "gene_id",
+    "phenotype_label",
+    "cohort",
+    "ancestry",
+    "annotation",
+    "sex",
+    "rec_p",
+    "rec_effect_or_z",
+    "rec_se",
+    "add_p",
+    "add_effect_or_z",
+    "add_se",
+    "rec_minus_add",
+    "best_p",
+    "enrichment",
+    "n_cohorts",
+    "n",
+    "cases",
+    "controls",
+  ];
   const lines = [columns.join("\t")];
   for (const row of rows) {
     lines.push(columns.map((column) => String(row[column] ?? "").replace(/\t/g, " ")).join("\t"));
@@ -1078,6 +1246,47 @@ function downloadRows() {
   link.download = "brava_recessive_browser_paired_rows.tsv";
   link.click();
   URL.revokeObjectURL(url);
+}
+
+async function downloadPlotPng() {
+  const svg = els.plotPanel ? els.plotPanel.querySelector("svg") : null;
+  if (!svg) {
+    if (els.dataStatus) els.dataStatus.textContent = "No plot to save";
+    return;
+  }
+  const clone = svg.cloneNode(true);
+  clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+  const source = new XMLSerializer().serializeToString(clone);
+  const svgBlob = new Blob([source], { type: "image/svg+xml;charset=utf-8" });
+  const url = URL.createObjectURL(svgBlob);
+  const image = new Image();
+  image.decoding = "async";
+  const loaded = new Promise((resolve, reject) => {
+    image.onload = resolve;
+    image.onerror = reject;
+  });
+  image.src = url;
+  try {
+    await loaded;
+    const box = svg.viewBox.baseVal;
+    const width = Math.max(1, Math.ceil(box?.width || svg.clientWidth || 780));
+    const height = Math.max(1, Math.ceil(box?.height || svg.clientHeight || 480));
+    const scale = 2;
+    const canvas = document.createElement("canvas");
+    canvas.width = width * scale;
+    canvas.height = height * scale;
+    const context = canvas.getContext("2d");
+    context.fillStyle = "#ffffff";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(image, 0, 0, canvas.width, canvas.height);
+    const pngUrl = canvas.toDataURL("image/png");
+    const link = document.createElement("a");
+    link.href = pngUrl;
+    link.download = "brava_recessive_forest_plot.png";
+    link.click();
+  } finally {
+    URL.revokeObjectURL(url);
+  }
 }
 
 async function copyLink() {
@@ -1095,7 +1304,6 @@ function applyParams() {
   els.searchInput.value = params.get("q") || "";
   if (els.landingSearchInput) els.landingSearchInput.value = els.searchInput.value;
   for (const [param, el] of [
-    ["source", els.sourceFilter],
     ["trait", els.traitFilter],
     ["cohort", els.cohortFilter],
     ["ancestry", els.ancestryFilter],
@@ -1128,12 +1336,13 @@ function attachEvents() {
   els.topButton.addEventListener("click", renderTopHits);
   els.resetButton.addEventListener("click", resetFilters);
   els.downloadButton.addEventListener("click", downloadRows);
+  if (els.downloadPlotButton) els.downloadPlotButton.addEventListener("click", downloadPlotPng);
+  if (els.clearCohortFocusButton) els.clearCohortFocusButton.addEventListener("click", clearCohortFocus);
   els.copyLinkButton.addEventListener("click", copyLink);
   els.searchInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") runSearch();
   });
   for (const el of [
-    els.sourceFilter,
     els.traitFilter,
     els.cohortFilter,
     els.ancestryFilter,
@@ -1168,7 +1377,6 @@ async function init() {
     searchInput: "search-input",
     searchButton: "search-button",
     topButton: "top-button",
-    sourceFilter: "source-filter",
     traitFilter: "trait-filter",
     cohortFilter: "cohort-filter",
     ancestryFilter: "ancestry-filter",
@@ -1181,17 +1389,19 @@ async function init() {
     resultTitle: "result-title",
     resultSubtitle: "result-subtitle",
     message: "message",
-    tableHead: "results-table",
-    tableBody: "results-table",
+    metaTable: "meta-results-table",
+    cohortTable: "cohort-results-table",
+    cohortFocusLabel: "cohort-focus-label",
+    clearCohortFocusButton: "clear-cohort-focus-button",
     detailPanel: "detail-panel",
+    plotTitle: "plot-title",
     plotPanel: "plot-panel",
+    downloadPlotButton: "download-plot-button",
     copyLinkButton: "copy-link-button",
     downloadButton: "download-button",
   })) {
     const element = $(id);
-    if (key === "tableHead") els[key] = element ? element.querySelector("thead") : null;
-    else if (key === "tableBody") els[key] = element ? element.querySelector("tbody") : null;
-    else els[key] = element;
+    els[key] = element;
   }
 
   try {
@@ -1208,7 +1418,8 @@ async function init() {
   } catch (error) {
     els.dataStatus.textContent = "No generated data";
     showMessage(`Generated data files were not found. Run scripts/build_browser_data.py first. ${error.message}`);
-    renderTable([]);
+    renderTable("meta", []);
+    renderTable("cohort", []);
     return;
   }
 
