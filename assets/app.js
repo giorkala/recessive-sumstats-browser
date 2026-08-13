@@ -17,6 +17,8 @@ const state = {
   currentCohortPairs: [],
   currentVisibleCohortPairs: [],
   cohortFocus: null,
+  selectedPairKey: "",
+  pendingFocus: null,
   lastLoadedRows: [],
   chunkCache: new Map(),
   sort: { key: "best_p", direction: "asc" },
@@ -555,8 +557,9 @@ function applyFilters(rows) {
   return sortPairs(pairRows(baseRows).filter((pair) => pairPassesModelFilter(pair, filters)));
 }
 
-function updateUrl(query = "") {
+function updateUrl(query = "", options = {}) {
   const params = new URLSearchParams();
+  const includeFocus = options.focus !== false;
   if (query) params.set("q", query);
   for (const [key, value] of Object.entries(activeFilters())) {
     if (Array.isArray(value)) {
@@ -564,6 +567,11 @@ function updateUrl(query = "") {
     } else if (value !== "" && value !== null) {
       params.set(key, value);
     }
+  }
+  const focus = state.cohortFocus || state.pendingFocus;
+  if (includeFocus && focus?.geneId && focus?.trait) {
+    params.set("focus_gene", focus.geneId);
+    params.set("focus_trait", focus.trait);
   }
   const next = `${window.location.pathname}${params.toString() ? `?${params.toString()}` : ""}`;
   window.history.replaceState({}, "", next);
@@ -603,13 +611,14 @@ function renderRows(rows, title, subtitle) {
   state.currentMetaPairs = metaPairs;
   state.currentCohortPairs = cohortPairs;
   state.cohortFocus = null;
+  state.selectedPairKey = "";
   els.resultTitle.textContent = title;
   const shownMeta = Math.min(MAX_TABLE_ROWS, metaPairs.length);
   const shownCohort = Math.min(MAX_TABLE_ROWS, cohortPairs.length);
   els.resultSubtitle.textContent = `${subtitle} ${metaPairs.length.toLocaleString()} meta-analysis pairs and ${cohortPairs.length.toLocaleString()} cohort-level pairs match. Showing ${shownMeta.toLocaleString()} meta and ${shownCohort.toLocaleString()} cohort rows.`;
   renderTable("meta", metaPairs.slice(0, MAX_TABLE_ROWS));
   renderCohortPanel();
-  renderFocusedPlot();
+  if (!applyPendingFocus()) renderFocusedPlot();
 }
 
 function pairFocusFromPair(pair) {
@@ -633,7 +642,78 @@ function focusLabel(focus) {
 
 function cohortPairsForCurrentFocus() {
   if (!state.cohortFocus) return state.currentCohortPairs;
-  return state.currentCohortPairs.filter((pair) => focusMatchesPair(state.cohortFocus, pair));
+  const filters = activeFilters();
+  const rows = state.currentRows.filter(
+    (row) =>
+      rowSource(row) !== "meta" &&
+      rowGeneId(row) === state.cohortFocus.geneId &&
+      rowTrait(row) === state.cohortFocus.trait &&
+      rowPassesBaseFilters(row, filters),
+  );
+  return sortPairs(pairRows(rows));
+}
+
+
+function rowMergeKey(row) {
+  return [
+    rowSource(row),
+    rowGeneId(row),
+    rowTrait(row),
+    get(row, ["BIOBANK", "biobank"]),
+    get(row, ["ANCESTRY", "ancestry"]),
+    get(row, ["ANNOTATION", "annotation"]),
+    get(row, ["SEX", "sex"]),
+    get(row, ["ENCODING", "encoding"]),
+  ].join("\u001f");
+}
+
+async function loadCohortRowsForPair(pair) {
+  if (!pair?.geneId) return false;
+  const gene = state.geneById.get(pair.geneId);
+  if (!gene || gene.bucket === undefined || gene.bucket === null || !chunkAvailable("pre_meta", gene.bucket)) return false;
+  const alreadyLoaded = state.currentRows.some(
+    (row) => rowSource(row) === "pre_meta" && rowGeneId(row) === pair.geneId && rowTrait(row) === pair.trait,
+  );
+  if (alreadyLoaded) return false;
+
+  const previousStatus = els.dataStatus ? els.dataStatus.textContent : "";
+  if (els.dataStatus) els.dataStatus.textContent = `Loading cohort rows for ${pair.symbol || pair.geneId}`;
+  const loadedRows = (await loadBucket("pre_meta", gene.bucket)).filter((row) => rowGeneId(row) === pair.geneId);
+  if (!loadedRows.length) {
+    if (els.dataStatus) els.dataStatus.textContent = previousStatus;
+    return false;
+  }
+
+  const seen = new Set(state.currentRows.map(rowMergeKey));
+  const addedRows = loadedRows.filter((row) => {
+    const key = rowMergeKey(row);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+  if (!addedRows.length) {
+    if (els.dataStatus) els.dataStatus.textContent = previousStatus;
+    return false;
+  }
+
+  state.currentRows = [...state.currentRows, ...addedRows];
+  state.lastLoadedRows = state.currentRows;
+  const pairs = applyFilters(state.currentRows);
+  state.currentPairs = pairs;
+  state.currentMetaPairs = pairs.filter((candidate) => candidate.source === "meta");
+  state.currentCohortPairs = pairs.filter((candidate) => candidate.source !== "meta");
+  const shownMeta = Math.min(MAX_TABLE_ROWS, state.currentMetaPairs.length);
+  const shownCohort = Math.min(MAX_TABLE_ROWS, state.currentCohortPairs.length);
+  els.resultSubtitle.textContent = `Loaded cohort rows for ${pair.symbol || pair.geneId}. ${state.currentMetaPairs.length.toLocaleString()} meta-analysis pairs and ${state.currentCohortPairs.length.toLocaleString()} cohort-level pairs match. Showing ${shownMeta.toLocaleString()} meta and ${shownCohort.toLocaleString()} cohort rows.`;
+  if (els.dataStatus) els.dataStatus.textContent = `${addedRows.length.toLocaleString()} cohort rows added`;
+  return true;
+}
+
+async function handlePairSelection(pair, kind) {
+  if (!pair) return;
+  renderDetail(pair);
+  if (kind === "meta") await loadCohortRowsForPair(pair);
+  setCohortFocus(pair, pair);
 }
 
 function renderCohortPanel() {
@@ -650,16 +730,34 @@ function renderCohortPanel() {
   renderTable("cohort", visiblePairs.slice(0, MAX_TABLE_ROWS));
 }
 
-function setCohortFocus(pair, selectedPair = pair) {
+function setCohortFocus(pair, selectedPair = pair, options = {}) {
   state.cohortFocus = pairFocusFromPair(pair);
+  state.selectedPairKey = selectedPair?.key || pair?.key || "";
+  renderTable("meta", state.currentMetaPairs.slice(0, MAX_TABLE_ROWS));
   renderCohortPanel();
   renderFocusedPlot(selectedPair);
+  if (options.updateUrl !== false) updateUrl(els.searchInput.value.trim());
 }
 
 function clearCohortFocus() {
   state.cohortFocus = null;
+  state.selectedPairKey = "";
+  renderTable("meta", state.currentMetaPairs.slice(0, MAX_TABLE_ROWS));
   renderCohortPanel();
   renderFocusedPlot();
+  updateUrl(els.searchInput.value.trim(), { focus: false });
+}
+
+function applyPendingFocus() {
+  if (!state.pendingFocus) return false;
+  const focus = state.pendingFocus;
+  const pair =
+    state.currentMetaPairs.find((candidate) => candidate.geneId === focus.geneId && candidate.trait === focus.trait) ||
+    state.currentCohortPairs.find((candidate) => candidate.geneId === focus.geneId && candidate.trait === focus.trait);
+  state.pendingFocus = null;
+  if (!pair) return false;
+  setCohortFocus(pair, pair, { updateUrl: false });
+  return true;
 }
 
 function renderFocusedPlot(selected = null) {
@@ -808,20 +906,23 @@ function renderTable(kind, pairs) {
   }
 
   body.innerHTML = pairs
-    .map(
-      (pair, index) => `
-        <tr data-row-kind="${kind}" data-row-index="${index}">
+    .map((pair, index) => {
+      const isSelected = state.selectedPairKey && pair.key === state.selectedPairKey;
+      const isFocusedCohort = kind === "cohort" && state.cohortFocus && focusMatchesPair(state.cohortFocus, pair);
+      const rowClass = isSelected || isFocusedCohort ? ' class="selected-row"' : "";
+      return `
+        <tr${rowClass} data-row-kind="${kind}" data-row-index="${index}">
           ${columns.map((column) => `<td>${tableCell(pair, column)}</td>`).join("")}
         </tr>
-      `,
-    )
+      `;
+    })
     .join("");
   body.querySelectorAll("tr[data-row-index]").forEach((rowEl) => {
     rowEl.addEventListener("click", () => {
-      const pairList = rowEl.dataset.rowKind === "meta" ? state.currentMetaPairs : state.currentVisibleCohortPairs;
+      const kind = rowEl.dataset.rowKind;
+      const pairList = kind === "meta" ? state.currentMetaPairs : state.currentVisibleCohortPairs;
       const pair = pairList[Number(rowEl.dataset.rowIndex)];
-      renderDetail(pair);
-      setCohortFocus(pair, pair);
+      handlePairSelection(pair, kind);
     });
   });
 }
@@ -1113,10 +1214,26 @@ function phenotypeMatches(query) {
   );
 }
 
-async function runSearch() {
+function populateSearchSuggestions() {
+  if (!els.searchSuggestions) return;
+  const options = [];
+  for (const gene of state.genes) {
+    if (gene.symbol) options.push(`<option value="${escapeHtml(gene.symbol)}" label="${escapeHtml(gene.id)}"></option>`);
+    options.push(`<option value="${escapeHtml(gene.id)}" label="${escapeHtml(gene.symbol || "Ensembl gene ID")}"></option>`);
+  }
+  for (const phenotype of state.phenotypes) {
+    options.push(`<option value="${escapeHtml(phenotype.id)}" label="${escapeHtml(phenotype.label)}"></option>`);
+    if (phenotype.label) options.push(`<option value="${escapeHtml(phenotype.label)}" label="${escapeHtml(phenotype.id)}"></option>`);
+  }
+  els.searchSuggestions.innerHTML = options.join("");
+}
+
+async function runSearch(options = {}) {
   showResultsPage();
   const query = els.searchInput.value.trim();
-  updateUrl(query);
+  const preserveFocus = options.preserveFocus === true;
+  if (!preserveFocus) state.pendingFocus = null;
+  updateUrl(query, { focus: preserveFocus });
   showMessage("");
   if (!query) {
     renderRows(state.topHits, "Top associations", "Smallest available p-values from the generated index.");
@@ -1152,6 +1269,7 @@ async function runSearch() {
     const ids = new Set(phenotypes.map((item) => item.id));
     els.traitFilter.value = phenotypes[0].id;
     const rows = state.topHits.filter((row) => ids.has(rowTrait(row)));
+    state.lastLoadedRows = rows;
     renderRows(rows, `Phenotype search: ${phenotypes[0].id}`, "Showing indexed top associations for matching phenotype.");
     showMessage("Full phenotype-wide loading is not generated yet; this view uses the top-hit index.");
     return;
@@ -1163,7 +1281,8 @@ async function runSearch() {
 function renderTopHits() {
   showResultsPage();
   els.searchInput.value = "";
-  updateUrl("");
+  state.pendingFocus = null;
+  updateUrl("", { focus: false });
   showMessage("");
   state.lastLoadedRows = state.topHits;
   renderRows(state.topHits, "Top associations", "Smallest available p-values from the generated index.");
@@ -1171,6 +1290,8 @@ function renderTopHits() {
 
 function resetFilters() {
   state.cohortFocus = null;
+  state.selectedPairKey = "";
+  state.pendingFocus = null;
   els.traitFilter.value = "";
   els.cohortFilter.value = "";
   els.ancestryFilter.value = "";
@@ -1315,6 +1436,9 @@ function applyParams() {
   if (params.has("annotation")) {
     setCheckboxValues(els.annotationFilter, params.get("annotation").split(","));
   }
+  const focusGene = params.get("focus_gene");
+  const focusTrait = params.get("focus_trait");
+  state.pendingFocus = focusGene && focusTrait ? { geneId: focusGene, trait: focusTrait } : null;
 }
 
 function attachEvents() {
@@ -1353,7 +1477,7 @@ function attachEvents() {
     el.addEventListener("change", () => {
       const base = state.lastLoadedRows.length ? state.lastLoadedRows : state.topHits;
       renderRows(base, els.resultTitle.textContent, "Filtered current rows.");
-      updateUrl(els.searchInput.value.trim());
+      updateUrl(els.searchInput.value.trim(), { focus: false });
     });
   }
 }
@@ -1372,6 +1496,7 @@ async function init() {
     resultsFootnote: "results-footnote",
     landingSearchForm: "landing-search-form",
     landingSearchInput: "landing-search-input",
+    searchSuggestions: "search-suggestions",
     homeButton: "home-button",
     dataStatus: "data-status",
     searchInput: "search-input",
@@ -1426,6 +1551,7 @@ async function init() {
   state.phenotypeById = new Map(state.phenotypes.map((item) => [item.id, item]));
   state.geneById = new Map(state.genes.map((item) => [item.id, item]));
   setupFilters();
+  populateSearchSuggestions();
   applySiteContent();
   renderSummary();
   renderQc();
@@ -1435,7 +1561,7 @@ async function init() {
   els.dataStatus.textContent = `${state.topHits.length.toLocaleString()} indexed hits`;
   const hasResultParams = new URLSearchParams(window.location.search).toString() !== "";
   if (els.searchInput.value.trim()) {
-    await runSearch();
+    await runSearch({ preserveFocus: true });
   } else if (hasResultParams) {
     showResultsPage();
     renderRows(state.topHits, "Top associations", "Smallest available p-values from the generated index.");

@@ -652,6 +652,15 @@ tbody tr:hover {
   background: #f1f5f9;
 }
 
+tbody tr.selected-row {
+  background: #ecfdf3;
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+tbody tr.selected-row:hover {
+  background: #dcfae6;
+}
+
 .gene-cell {
   display: grid;
   gap: 2px;

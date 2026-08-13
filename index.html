@@ -24,7 +24,7 @@
         </p>
         <form class="landing-search" id="landing-search-form">
           <label class="sr-only" for="landing-search-input">Search the recessive catalogue</label>
-          <input id="landing-search-input" type="search" placeholder="Search gene, Ensembl ID, or phenotype" />
+          <input id="landing-search-input" type="search" list="search-suggestions" placeholder="Search gene, Ensembl ID, or phenotype" />
           <button id="landing-search-button" type="submit">Search</button>
         </form>
         <figure class="landing-image">
@@ -52,7 +52,7 @@
         <aside class="filters" aria-label="Filters">
           <label class="field">
             <span>Search</span>
-            <input id="search-input" type="search" placeholder="Gene symbol, Ensembl ID, or phenotype" />
+            <input id="search-input" type="search" list="search-suggestions" placeholder="Gene symbol, Ensembl ID, or phenotype" />
           </label>
 
           <div class="button-row">
@@ -159,6 +159,7 @@
       </main>
     </section>
 
+    <datalist id="search-suggestions"></datalist>
     <a class="feedback-button" id="feedback-button" href="mailto:kalantzis@ebi.ac.uk?subject=BRaVa%20recessive%20browser%20feedback">Send feedback</a>
     <script src="assets/app.js"></script>
   </body>
