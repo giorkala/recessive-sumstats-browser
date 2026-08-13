@@ -124,15 +124,50 @@ button:disabled {
   line-height: 1.45;
 }
 
-.paper-citation a,
-.comment-link {
+.citation-box {
+  grid-column: 1;
+  max-width: 760px;
+  margin: 10px 0 0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.72);
+  padding: 12px 14px 14px;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.04);
+}
+
+.citation-header {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.citation-text {
+  margin: 10px 0 0;
+  color: var(--ink);
+  /* font-size: 0.99rem; */
+  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  line-height: 1.45;
+}
+
+.citation-text a {
+  color: var(--teal-dark);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.citation-text a:hover {
+  text-decoration: underline;
+}
+
+.paper-citation a {
   color: var(--teal-dark);
   font-weight: 800;
   text-decoration: none;
 }
 
-.paper-citation a:hover,
-.comment-link:hover {
+.paper-citation a:hover {
   text-decoration: underline;
 }
 
@@ -176,30 +211,6 @@ button:disabled {
   padding: 0 22px;
 }
 
-.landing-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 14px;
-}
-
-.comment-button {
-  display: inline-flex;
-  align-items: center;
-  min-height: 40px;
-  border: 1px solid var(--line-strong);
-  border-radius: 6px;
-  background: #ffffff;
-  color: var(--ink);
-  font-weight: 800;
-  padding: 0 14px;
-  text-decoration: none;
-}
-
-.comment-button:hover {
-  border-color: var(--teal);
-  color: var(--teal-dark);
-}
 
 .feedback-button {
   position: fixed;

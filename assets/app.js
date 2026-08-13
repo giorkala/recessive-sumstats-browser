@@ -307,24 +307,31 @@ function mailtoFor(email) {
 
 function applySiteContent() {
   const content = state.siteContent || {};
-  if (content.landingEyebrow && els.landingEyebrow) els.landingEyebrow.textContent = content.landingEyebrow;
-  if (content.landingTitle && els.landingTitle) els.landingTitle.textContent = content.landingTitle;
-  if (content.landingCopy && els.landingCopy) els.landingCopy.textContent = content.landingCopy;
 
-  if (els.paperPrefix) els.paperPrefix.textContent = content.paperPrefix || "Read our publication for more details:";
-  if (els.paperCitation && content.paperUrl) {
-    const prefix = escapeHtml(content.paperPrefix || "Read our publication for more details:");
-    els.paperCitation.innerHTML = `<span id="paper-prefix">${prefix}</span> <a href="${escapeHtml(content.paperUrl)}" target="_blank" rel="noreferrer">${escapeHtml(content.paperLabel || content.paperUrl)}</a>`;
-    els.paperPrefix = $("paper-prefix");
+  const htmlOrContent = (element, datasetKey, contentKey, fallback = "") => {
+    if (!element) return fallback;
+    const htmlValue = element.dataset[datasetKey];
+    if (htmlValue && String(htmlValue).trim()) return htmlValue;
+    return content[contentKey] || fallback;
+  };
+
+  if (els.landingEyebrow) {
+    const value = htmlOrContent(els.landingEyebrow, "landingEyebrow", "landingEyebrow", "BRaVa recessive catalogue");
+    if (value) els.landingEyebrow.textContent = value;
+  }
+
+  if (els.landingTitle) {
+    const value = htmlOrContent(els.landingTitle, "landingTitle", "landingTitle", "Recessive effects across biobanks");
+    if (value) els.landingTitle.textContent = value;
+  }
+
+  if (els.landingCopy) {
+    const value = htmlOrContent(els.landingCopy, "landingCopy", "landingCopy", "Companion browser for the BRaVa recessive association study.");
+    if (value) els.landingCopy.textContent = value;
   }
 
   const email = content.contactEmail || "kalantzis@ebi.ac.uk";
   if (els.feedbackButton) els.feedbackButton.href = mailtoFor(email);
-
-  if (content.copyright) {
-    if (els.siteFootnote) els.siteFootnote.textContent = content.copyright;
-    if (els.resultsFootnote) els.resultsFootnote.textContent = content.copyright;
-  }
 }
 
 function selectedSources() {
@@ -1489,8 +1496,6 @@ async function init() {
     landingEyebrow: "landing-eyebrow",
     landingTitle: "landing-title",
     landingCopy: "landing-copy",
-    paperCitation: "paper-citation",
-    paperPrefix: "paper-prefix",
     feedbackButton: "feedback-button",
     siteFootnote: "site-footnote",
     resultsFootnote: "results-footnote",
