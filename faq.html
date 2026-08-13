@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FAQ and definitions — BRaVa Recessive Browser</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body class="faq-page">
+    <main class="faq-shell">
+      <div class="faq-header">
+        <p class="eyebrow">BRaVa recessive catalogue</p>
+        <h1>Frequently Asked Questions</h1>
+        <p><a href="./">← Back to browser</a></p>
+      </div>
+
+      <section class="faq-section" aria-label="Frequently asked questions">
+        <!-- <details open> -->
+
+          <details>
+            <summary>What study are these summary statistics from?</summary>
+            <p>
+              These results are from the BRaVa study <strong>“Meta-analysis across six global
+              biobanks identifies recessive coding associations with complex traits and diseases.”</strong>
+            </p>
+            <p>
+              The study analysed recessive gene-based effects across up to
+              <strong>948,690 exome- or whole-genome-sequenced participants</strong> and 41 phenotypes.
+            </p>
+            <p>
+              Please check our
+              <a href="https://www.sciencedirect.com/science/article/pii/S0002929726001552" target="_blank" rel="noreferrer">
+                publication
+              </a>
+              for more details.
+            </p>
+          </details>
+
+        <details>
+          <summary>What is BRaVa?</summary>
+          <p>
+            This study is part of BRaVa, the <strong>Biobank Rare Variant Analysis (BRaVa) consortium</strong>
+            harmonises rare coding-variant association analyses across global biobanks and
+            meta-analyses them, maximising power and ancestral diversity for gene-based
+            rare-variant discovery.
+          </p>
+
+          <p>
+            Check our flagship paper 
+            <a href="https://www.medrxiv.org/content/10.64898/2026.05.21.26353759v1" target="_blank" rel="noreferrer"> here</a>.
+          </p>
+        </details>
+
+        <details>
+          <summary>Which cohorts are included?</summary>
+          <p>The analysis includes six biobanks:</p>
+          <ul>
+            <li><strong>AOU</strong> — All of Us Research Program</li>
+            <li><strong>BioMe</strong> — BioMe Biobank</li>
+            <li><strong>BBJ</strong> — BioBank Japan</li>
+            <li><strong>G&amp;H / GNH</strong> — Genes &amp; Health</li>
+            <li><strong>UKB</strong> — UK Biobank</li>
+            <li><strong>100kGP / GEL</strong> — Genomics England 100,000 Genomes Project</li>
+          </ul>
+          <p>Analyses were generally carried out separately within genetically inferred ancestry groups before meta-analysis.</p>
+        </details>
+
+        <details>
+          <summary>What does “recessive” mean in these analyses?</summary>
+          <p>
+            For each gene, individuals were classified according to whether qualifying variants affected
+            <strong>zero, one, or both copies of the gene</strong>.
+          </p>
+          <p>
+            The recessive model compares individuals with a qualifying <strong>bi-allelic genotype</strong>
+            against everyone else. In other words, the recessive genotype is encoded as:
+          </p>
+          <p><code>0, 0, 1</code></p>
+          <p>for zero, one, or two affected gene copies respectively.</p>
+        </details>
+
+        <details>
+          <summary>What is a bi-allelic genotype?</summary>
+          <p>
+            A bi-allelic genotype means that <strong>both copies of a gene contain qualifying variants</strong>.
+          </p>
+          <p>This can occur through:</p>
+          <ul>
+            <li><strong>Homozygosity:</strong> the same qualifying variant is present on both copies of the gene.</li>
+            <li><strong>Compound heterozygosity (CH):</strong> two different qualifying variants occur on opposite copies of the gene.</li>
+          </ul>
+          <p>
+            Statistical phasing was used to determine whether different variants were on opposite haplotypes and
+            could therefore form a compound-heterozygous genotype.
+          </p>
+        </details>
+
+        <details>
+          <summary>Were compound heterozygous genotypes included?</summary>
+          <p>
+            Yes, where phased data were available. Including compound heterozygotes increased the number of
+            detectable damaging bi-allelic genotypes by approximately <strong>19%</strong>.
+          </p>
+          <p>
+            <strong>All of Us was not phased for this analysis</strong>, so compound-heterozygous genotypes were
+            not identified in AOU; its recessive analyses therefore rely on homozygous genotypes.
+          </p>
+        </details>
+
+        <details>
+          <summary>What MAF threshold was used?</summary>
+          <p>
+            Qualifying variants were restricted to variants with <strong>minor allele frequency (MAF) &lt; 5%</strong>.
+          </p>
+        </details>
+
+        <details>
+          <summary>What do the annotation masks mean?</summary>
+          <p>Four gene-level variant masks were considered.</p>
+
+          <p><strong>pLoF</strong></p>
+          <p>Predicted loss-of-function variants, high confidence. These represent variants predicted to severely disrupt gene function.</p>
+
+          <p><strong>pLoF | damaging_missense</strong></p>
+          <p>
+            Includes pLoF variants plus predicted damaging missense/protein-altering variants. Damaging variants
+            include low-confidence loss-of-function variants and variants meeting one or more of the following
+            prediction thresholds:
+          </p>
+          <ul>
+            <li><strong>REVEL ≥ 0.773</strong></li>
+            <li><strong>CADD ≥ 28.1</strong></li>
+            <li>splice variants with <strong>SpliceAI Δ ≥ 0.5</strong></li>
+          </ul>
+
+          <p><strong>nonsynonymous</strong></p>
+          <p>The broadest protein-altering mask. It includes:</p>
+          <ul>
+            <li>pLoF variants</li>
+            <li>damaging missense/protein-altering variants</li>
+            <li>other missense/protein-altering variants</li>
+          </ul>
+
+          <p><strong>synonymous</strong></p>
+          <p>
+            Synonymous coding variants. These generally do not alter the encoded amino acid and were included
+            primarily as a <strong>negative-control mask</strong>.
+          </p>
+        </details>
+
+        <details>
+          <summary>Are the annotation masks nested?</summary>
+          <p>Yes. Conceptually:</p>
+          <p><code>pLoF ⊂ pLoF|damaging_missense ⊂ nonsynonymous</code></p>
+          <p>The broader masks therefore contain progressively larger sets of qualifying variants.</p>
+        </details>
+
+        <details>
+          <summary>What is the additive model shown in the browser?</summary>
+          <p>
+            The corresponding additive analysis encodes the number of <strong>affected gene copies</strong> as:
+          </p>
+          <p><code>0, 1, 2</code></p>
+          <p>
+            This is slightly different from a conventional rare-variant additive burden based on the total number
+            or weighted sum of qualifying variants carried by an individual. For a more powerful additive association analysis, please refer to our <a href="https://www.medrxiv.org/content/10.64898/2026.05.21.26353759v1" target="_blank" rel="noreferrer"> main paper</a>.
+          </p>
+        </details>
+
+        <details>
+          <summary>How were ancestry groups handled?</summary>
+          <p>
+            Each biobank was divided into genetically inferred ancestry groups. Gene–phenotype association testing
+            was performed within these <strong>biobank × ancestry subcohorts</strong>, which were subsequently combined in
+            meta-analysis.
+          </p>
+          <p>
+            The ancestry groups represented across the study include <strong>AFR, AMR, EAS, EUR and SAS</strong>,
+            although not every ancestry is represented in every biobank.
+          </p>
+        </details>
+
+        <details>
+          <summary>How many individuals with bi-allelic genotypes were required for a test?</summary>
+          <p>
+            An association was evaluated only when at least <strong>five individuals with a bi-allelic genotype</strong>
+            were available for that gene, phenotype and subcohort.
+          </p>
+        </details>
+
+        <details>
+          <summary>How were results meta-analysed?</summary>
+          <p>
+            Association testing was first performed within individual biobank–ancestry subcohorts.
+          </p>
+          <p>
+            For each damaging annotation mask, evidence was then combined across subcohorts using Stouffer's method.
+            The study also combined evidence across the different nonsynonymous masks using the
+            <strong>Cauchy Combination Test (CCT)</strong> to obtain an overall gene–trait association p-value.
+          </p>
+        </details>
+
+        <details>
+          <summary>What does the effect estimate mean?</summary>
+          <p>
+            For <strong>binary phenotypes</strong>, effect sizes are reported as odds ratios or their corresponding
+            regression estimates.
+          </p>
+          <p>
+            For <strong>quantitative phenotypes</strong>, effect estimates represent changes in the transformed phenotype,
+            generally expressed in standard-deviation units.
+          </p>
+          <p>
+            The direction of effect refers to individuals carrying a bi-allelic qualifying genotype compared with
+            individuals without one.
+          </p>
+        </details>
+
+        <details>
+          <summary>Why can effect estimates be very large?</summary>
+          <p>
+            Recessive qualifying genotypes can be extremely rare. Consequently, some gene–phenotype tests are based
+            on relatively few bi-allelic carriers.
+          </p>
+          <p>
+            Large effect estimates and wide confidence intervals should therefore be interpreted together with:
+          </p>
+          <ul>
+            <li>the number of carriers,</li>
+            <li>the contributing cohorts,</li>
+            <li>consistency of effects between cohorts, and</li>
+            <li>the statistical uncertainty.</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>Why are some cohort-level results missing?</summary>
+          <p>
+            A gene–phenotype combination may not have been tested in every cohort or ancestry. Possible reasons include:
+          </p>
+          <ul>
+            <li>insufficient numbers of bi-allelic carriers,</li>
+            <li>the phenotype not being available in that cohort,</li>
+            <li>ancestry-specific sample availability, or</li>
+            <li>cohort-specific QC or analysis requirements.</li>
+          </ul>
+          <p>A missing result should therefore <strong>not</strong> be interpreted as evidence of no association.</p>
+        </details>
+
+        <!-- <details>
+          <summary>Why do some genes have results for one annotation but not another?</summary>
+          <p>
+            Each annotation mask contains a different set of variants. A gene may therefore have enough bi-allelic
+            carriers to test a broad mask such as <code>nonsynonymous</code>, but too few carriers to test a stricter
+            mask such as <code>pLoF</code>.
+          </p>
+        </details> -->
+
+        <details>
+          <summary>What is the difference between a cohort-level result and a meta-analysis result?</summary>
+          <p>
+            <strong>Cohort-level results</strong> show the association estimated within an individual biobank and ancestry group.
+          </p>
+          <p>
+            <strong>Meta-analysis results</strong> combine evidence across contributing subcohorts, giving greater
+            statistical power and allowing evidence to be assessed across populations. These, however, do not include effect size estimates, as is the case for individual cohorts.
+          </p>
+        </details>
+
+        <details>
+          <summary>Does a significant association prove a recessive mechanism?</summary>
+          <p>
+            No. A significant recessive association indicates that individuals with bi-allelic qualifying genotypes
+            differ in the phenotype.
+          </p>
+          <p>
+            The study additionally compared recessive and additive models to identify associations whose evidence was
+            substantially stronger under a recessive model. The paper classified an association as more consistent with
+            recessive inheritance when the recessive p-value was more than 100-fold smaller than the corresponding
+            additive p-value.
+          </p>
+        </details>
+
+        <details>
+          <summary>How should these results be interpreted?</summary>
+          <p>
+            The browser is intended as a resource for exploring gene-based recessive associations.
+          </p>
+          <p>
+            Associations should be interpreted alongside the number of carriers, effect estimates, confidence intervals,
+            consistency across cohorts and ancestries, annotation mask, biological evidence, and results reported in the
+            publication.
+          </p>
+          <p>
+            These summary statistics should not by themselves be interpreted as evidence that a particular variant is
+            pathogenic or clinically actionable.
+          </p>
+        </details>
+
+        <details>
+          <summary>Where can I find the full methodology?</summary>
+          <p>
+            Full details of cohort processing, phenotype definitions, variant annotation, phasing, association testing
+            and meta-analysis are available in the accompanying BRaVa publication and supplementary information.
+          </p>
+          <p>
+            The browser provides a convenient interface to the released cohort-level and meta-analysis summary statistics.
+          </p>
+        </details>
+      </section>
+    </main>
+  </body>
+</html>
