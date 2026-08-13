@@ -275,7 +275,7 @@ function renderSummary() {
   const sources = state.manifest?.sources || {};
   const rows = Object.values(sources).reduce((sum, source) => sum + Number(source.rows || 0), 0);
   const metrics = [
-    ["Rows indexed", formatInt(rows)],
+    ["Results indexed", formatInt(rows)],
     ["Phenotypes", formatInt(state.manifest?.counts?.phenotypes)],
     ["Genes", formatInt(state.manifest?.counts?.genes)],
   ];
