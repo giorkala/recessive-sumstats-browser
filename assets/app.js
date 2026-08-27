@@ -30,6 +30,15 @@ function $(id) {
   return document.getElementById(id);
 }
 
+function trackEvent(name) {
+  if (window.goatcounter && window.goatcounter.count) {
+    window.goatcounter.count({
+      path: `event/${name}`,
+      event: true,
+    });
+  }
+}
+
 function formatInt(value) {
   const number = Number(value);
   return Number.isFinite(number) ? number.toLocaleString() : "NA";
@@ -1236,6 +1245,7 @@ function populateSearchSuggestions() {
 }
 
 async function runSearch(options = {}) {
+  trackEvent("search");
   showResultsPage();
   const query = els.searchInput.value.trim();
   const preserveFocus = options.preserveFocus === true;
@@ -1286,6 +1296,7 @@ async function runSearch(options = {}) {
 }
 
 function renderTopHits() {
+  trackEvent("top_hits");
   showResultsPage();
   els.searchInput.value = "";
   state.pendingFocus = null;
@@ -1339,6 +1350,7 @@ function pairToExportRow(pair) {
 }
 
 function downloadRows() {
+  trackEvent("download_rows");
   const rows = [...state.currentMetaPairs, ...state.currentVisibleCohortPairs].map(pairToExportRow);
   if (!rows.length) return;
   const columns = [
@@ -1377,6 +1389,7 @@ function downloadRows() {
 }
 
 async function downloadPlotPng() {
+  trackEvent("save_png");
   const svg = els.plotPanel ? els.plotPanel.querySelector("svg") : null;
   if (!svg) {
     if (els.dataStatus) els.dataStatus.textContent = "No plot to save";
